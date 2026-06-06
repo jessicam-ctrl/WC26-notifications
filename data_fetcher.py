@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from datetime import datetime
 
 # 1. Wake up dotenv
 load_dotenv()
@@ -65,10 +66,13 @@ for match in matches:
         home_name = match["home"]["name"]
         away_name = match["away"]["name"]
         time = match["time"]
+        formatted_time = datetime.strptime(time, "%d.%m.%Y %H:%M")
         match_info = f"Teams: {home_name} vs {away_name} at {time}\n"
         world_cup_matches += match_info
     else:
         pass
 
-print(world_cup_matches)
+print(f"Successfully converted to Python object: {formatted_time}")
+print(f"The match year is: {formatted_time.year}")
+print(f"The match hour is: {formatted_time.hour}:{formatted_time.minute}")
 
